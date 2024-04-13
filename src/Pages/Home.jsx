@@ -23,9 +23,17 @@ function Home () {
         });
     }, [])
 
+    const Logout = () => {
+        signOut(auth).then(() => {
+            navigate('/login');
+        })
+
+    }
+
     return (
         <>
         <h1>Home Page</h1>
+        <button className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400' onClick={Logout}>Logout</button>
         </>
     )
 }
