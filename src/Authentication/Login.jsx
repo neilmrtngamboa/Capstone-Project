@@ -22,6 +22,29 @@ function Login () {
 
     }, [])
 
+    const Login = () => {
+
+        if (email !== '' && password !== '') {
+    
+          const auth = getAuth(firebaseApp);
+          signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+    
+              const user = userCredential.user;
+              alert('sign in successful')
+              navigate('/');
+            })
+            .catch((error) => {
+                alert('sign in failed')
+            });
+    
+        } else {
+          alert('please fill out the empty fields')
+        }
+    
+    
+      }
+
     
     return (
         <>
@@ -33,7 +56,7 @@ function Login () {
                 onChange={(e) => setPassword(e.target.value)} value={password}
         />
 
-        <button>Login</button>
+        <button onClick={Login}>Login</button>
         </>
     )
 }
