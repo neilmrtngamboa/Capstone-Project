@@ -1,6 +1,6 @@
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc } from 'firebase/firestore'
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Tenants from './Tenants.jsx';
@@ -79,6 +79,10 @@ function Home () {
         }
     }
 
+    const deleteTenant = (tenantID) => {
+        deleteDoc(doc(db,'tenants',tenantID))
+    }
+
     return (
         <>
 
@@ -107,6 +111,8 @@ function Home () {
             firstname = {showTenants.firstname}
             lastname = {showTenants.lastname}
             unit = {showTenants.unit}
+            tenantID = {showTenants.tenantID}
+            deleteTenant = {deleteTenant}
 
             />
             )
