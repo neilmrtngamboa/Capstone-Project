@@ -1,6 +1,6 @@
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { getFirestore, addDoc } from 'firebase/firestore'
+import { getFirestore, collection, addDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -38,6 +38,21 @@ function Home () {
 
     }
 
+    const addTenant = () => {
+
+        if (tenant.firstname === '' || tenant.lastname === '' || tenant.unit === ''){
+            alert('please fill out the empty fields')
+        }else{
+            addDoc(collection(db,'tenants'),tenant);
+            alert('data has been successfully added!')
+            setTenant({
+                firstname: '',
+                lastname: '',
+                unit: '',
+            })
+        }
+    }
+
     return (
         <>
 
@@ -54,8 +69,7 @@ function Home () {
         <input type="text" placeholder='Unit'
         onChange={(e) => setTenant({...tenant, unit: e.target.value})} value={tenant.unit}
         />
-        <button className='border-2 border-black p-2 bg-blue-500 hover:bg-blue-700'>Add+</button>
-        <p>{tenant.firstname} {tenant.lastname} {tenant.unit}</p>
+        <button className='border-2 border-black p-2 bg-blue-500 hover:bg-blue-700' onClick={addTenant}>Add+</button>
         </>
     )
 }
