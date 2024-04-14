@@ -1,8 +1,9 @@
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { getFirestore, collection, addDoc } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore'
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import Tenants from './Tenants.jsx';
 
 
 function Home () {
@@ -31,6 +32,19 @@ function Home () {
                 navigate('/login');
             }
         });
+    
+        onSnapshot(collection(db, 'tenants'), snapshot => {
+            const newOccupiedList = [];
+
+            snapshot.forEach(occupiedUnit => {
+                let tenantID = occupiedUnit.data();
+                tenantID['tenantID'] = occupiedUnit.id
+                newOccupiedList.push(tenantID)
+            })
+            setTenantList(newOccupiedList);
+
+        });
+
     }, [])
 
     const Logout = () => {
@@ -82,6 +96,21 @@ function Home () {
         onChange={(e) => setTenant({...tenant, unit: e.target.value})} value={tenant.unit}
         />
         <button className='border-2 border-black p-2 bg-blue-500 hover:bg-blue-700' onClick={addTenant}>Add+</button>
+        <br />
+        <br />
+        <hr />
+
+        {
+            tenantList.map ((showTenants) =>
+            <Tenants 
+            key = {showTenants.id}
+            firstname = {showTenants.firstname}
+            lastname = {showTenants.lastname}
+            unit = {showTenants.unit}
+
+            />
+            )
+        }
         </>
     )
 }
