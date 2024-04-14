@@ -18,6 +18,8 @@ function Home () {
         unit: ''
     })
 
+    const [tenantList, setTenantList] = useState([])
+
     useEffect (() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -43,13 +45,23 @@ function Home () {
         if (tenant.firstname === '' || tenant.lastname === '' || tenant.unit === ''){
             alert('please fill out the empty fields')
         }else{
+            if ( 2 > tenantList.length) {
             addDoc(collection(db,'tenants'),tenant);
+            setTenantList (tenantList => [...tenantList, tenant])
             alert('data has been successfully added!')
             setTenant({
                 firstname: '',
                 lastname: '',
                 unit: '',
             })
+            }else {
+                alert('All of the units have been occupied!');
+                setTenant({
+                    firstname: '',
+                    lastname: '',
+                    unit: '',
+                })
+            }
         }
     }
 
