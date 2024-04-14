@@ -1,5 +1,6 @@
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { getFirestore, addDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +9,14 @@ function Home () {
 
     let navigate = useNavigate();
     const auth = getAuth(firebaseApp);
+    const db = getFirestore(firebaseApp)
     const [userProfile, setUserProfile] = useState({})
+
+    const [tenant,setTenant] = useState({
+        firstname: '',
+        lastname: '',
+        unit: ''
+    })
 
     useEffect (() => {
         onAuthStateChanged(auth, (user) => {
@@ -37,10 +45,17 @@ function Home () {
         <button className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400' onClick={Logout}>Logout</button>
         <hr />
         <h5>Add a new tenant</h5>
-        <input type="text" placeholder='First Name' />
-        <input type="text" placeholder='Last Name' />
-        <input type="text" placeholder='Unit' />
+        <input type="text" placeholder='First Name' 
+        onChange={(e) => setTenant({...tenant, firstname: e.target.value})} value={tenant.firstname}
+        />
+        <input type="text" placeholder='Last Name'
+        onChange={(e) => setTenant({...tenant, lastname: e.target.value})} value={tenant.lastname}
+        />
+        <input type="text" placeholder='Unit'
+        onChange={(e) => setTenant({...tenant, unit: e.target.value})} value={tenant.unit}
+        />
         <button className='border-2 border-black p-2 bg-blue-500 hover:bg-blue-700'>Add+</button>
+        <p>{tenant.firstname} {tenant.lastname} {tenant.unit}</p>
         </>
     )
 }
