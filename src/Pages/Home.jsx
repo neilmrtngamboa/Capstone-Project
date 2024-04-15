@@ -108,7 +108,7 @@ function Home () {
         <br />
         <hr />
         <p>Units Occupied: {tenantList.length}/2</p>
-        <Link to='/payments'>Payments</Link>
+        <Link to='/payments' className='text-blue-500 underline hover:no-underline hover:text-blue-700'>Payments</Link>
 
         {
             tenantList.map ((showTenants) =>
