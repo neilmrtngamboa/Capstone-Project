@@ -19,30 +19,31 @@ function Payments () {
 
 
     useEffect (() => {
-        onSnapshot(collection(db, 'tenants'), snapshot => {
+        onSnapshot(collection(db, 'payments'), snapshot => {
             const newPaymentList = [];
 
             snapshot.forEach(payment => {
                 let paymentID = payment.data();
                 paymentID['paymentID'] = payment.id
-                newOccupiedList.push(paymentID)
+                newPaymentList.push(paymentID)
             })
-            setTenantList(newPaymentList);
+            setPaymentList(newPaymentList);
 
         });
     }, [])
 
     const addPayment = () => {
         if (paymentDetails.name !== '' || paymentDetails.unit !== '' || paymentDetails.amount !== '' || paymentDetails.amount !== ''){
-            addDoc(collection(db,'payments'),paymentDetails).then(() =>{
+            addDoc(collection(db,'payments'),paymentDetails)
                 setPaymentList (paymentList => [...paymentList, paymentDetails])
                 alert('data has been successfully added')
                 setPaymentDetails({
+                    ...paymentDetails,
                     name: '',
                     unit: '',
                     amount: '',
                 })
-            })
+            
         }else{
             alert('Please fill out the empty fields')
         }
@@ -75,7 +76,7 @@ function Payments () {
                 unit={showPayments.unit}
                 amount={showPayments.amount}
                 status={showPayments.status}
-                date={showPayments.date}
+                date={showPayments.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit'})}
                 paymentID={showPayments.paymentID}
             />
             )
