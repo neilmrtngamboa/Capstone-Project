@@ -10,10 +10,24 @@ function Payments () {
     const [paymentDetails,setPaymentDetails] = useState({
         name: '',
         unit: '',
-        amount: 0,
+        amount: '',
         status: 'PAID',
         date: Timestamp.now()
     })
+
+    const addPayment = () => {
+        if (paymentDetails.name !== '' || paymentDetails.unit !== '' || paymentDetails.amount !== '' || paymentDetails.amount !== ''){
+            addDoc(collection(db,'payments'),paymentDetails).then(() =>{
+                setPaymentDetails({
+                    name: '',
+                    unit: '',
+                    amount: '',
+                })
+            })
+        }else{
+            alert('Please fill out the empty fields')
+        }
+    }
 
     return (
         <>
@@ -31,7 +45,7 @@ function Payments () {
             onChange={(e) => setPaymentDetails({...paymentDetails, amount: e.target.value})} 
             value={paymentDetails.amount}
             />
-            <button className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400'> Add</button>
+            <button onClick={addPayment} className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400'> Add</button>
         </div>
         
         </>
