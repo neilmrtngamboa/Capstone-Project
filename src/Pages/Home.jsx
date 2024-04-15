@@ -2,7 +2,7 @@ import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc } from 'firebase/firestore'
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Tenants from './Tenants.jsx';
 
 
@@ -83,6 +83,10 @@ function Home () {
         deleteDoc(doc(db,'tenants',tenantID))
     }
 
+    const goToPayments = () => {
+        navigate('/payments')
+    }
+
     return (
         <>
 
@@ -104,6 +108,7 @@ function Home () {
         <br />
         <hr />
         <p>Units Occupied: {tenantList.length}/2</p>
+        <Link to='/payments'>Payments</Link>
 
         {
             tenantList.map ((showTenants) =>
