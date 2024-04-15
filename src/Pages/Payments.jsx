@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getFirestore, addDoc, collection, Timestamp, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
+import ListOfPayments from "./ListOfPayments.jsx";
 
 function Payments () {
 
@@ -15,6 +16,21 @@ function Payments () {
         date: Timestamp.now()
     })
     const [paymentList, setPaymentList] = useState([])
+
+
+    useEffect (() => {
+        onSnapshot(collection(db, 'tenants'), snapshot => {
+            const newPaymentList = [];
+
+            snapshot.forEach(payment => {
+                let paymentID = payment.data();
+                paymentID['paymentID'] = payment.id
+                newOccupiedList.push(paymentID)
+            })
+            setTenantList(newPaymentList);
+
+        });
+    }, [])
 
     const addPayment = () => {
         if (paymentDetails.name !== '' || paymentDetails.unit !== '' || paymentDetails.amount !== '' || paymentDetails.amount !== ''){
@@ -51,6 +67,19 @@ function Payments () {
             <button onClick={addPayment} className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400'> Add</button>
         </div>
         
+        {
+            paymentList.map ((showPayments) => 
+            <ListOfPayments 
+                key={showPayments.id}
+                name={showPayments.name}
+                unit={showPayments.unit}
+                amount={showPayments.amount}
+                status={showPayments.status}
+                date={showPayments.date}
+                paymentID={showPayments.paymentID}
+            />
+            )
+        }
         </>
     )
 }
