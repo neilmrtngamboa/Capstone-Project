@@ -11,14 +11,18 @@ function Payments () {
     const [paymentDetails,setPaymentDetails] = useState({
         name: '',
         unit: '',
-        amount: '',
+        amount: 0,
         status: 'PAID',
         date: Timestamp.now()
     })
     const [paymentList, setPaymentList] = useState([])
+    const [totalEarnings, setTotalEarnings] = useState(0)
 
 
     useEffect (() => {
+        
+        setTotalEarnings(totalEarnings + parseInt(paymentDetails.amount));
+
         onSnapshot(collection(db, 'payments'), snapshot => {
             const newPaymentList = [];
 
@@ -30,18 +34,21 @@ function Payments () {
             setPaymentList(newPaymentList);
 
         });
+
     }, [])
 
     const addPayment = () => {
-        if (paymentDetails.name !== '' || paymentDetails.unit !== '' || paymentDetails.amount !== '' || paymentDetails.amount !== ''){
+        if (paymentDetails.name !== '' || paymentDetails.unit !== '' || paymentDetails.amount !== '' 
+            || paymentDetails.amount != ''){
             addDoc(collection(db,'payments'),paymentDetails)
                 setPaymentList (paymentList => [...paymentList, paymentDetails])
+                setTotalEarnings(totalEarnings + parseInt(paymentDetails.amount));
                 alert('data has been successfully added')
                 setPaymentDetails({
                     ...paymentDetails,
                     name: '',
                     unit: '',
-                    amount: '',
+                    amount: 0,
                 })
             
         }else{
@@ -51,6 +58,7 @@ function Payments () {
 
     const deletePayment = (paymentID) => {
         deleteDoc(doc(db,'payments',paymentID))
+        setTotalEarnings(totalEarnings - parseInt(paymentDetails.amount));
     }
 
     return (
@@ -70,6 +78,7 @@ function Payments () {
             value={paymentDetails.amount}
             />
             <button onClick={addPayment} className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400'> Add</button>
+            <h5>Total Earnings: {totalEarnings}</h5>
         </div>
         
         {

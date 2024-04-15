@@ -2,7 +2,7 @@ function ListOfPayments ({name, unit, amount, status, date, paymentID, deletePay
     return(
         <>
         <div className="border-1 border-black">
-            <p>{name} {unit} {amount} {status} {date}</p>
+            <p>Name: {name} Unit: {unit} Amount: {amount} Status: {status} Date: {date}</p>
             <button className='border-1 border-black p-1 bg-red-500 hover:bg-red-700' 
             onClick={() => deletePayment(paymentID)}>Delete Payment</button>
 
