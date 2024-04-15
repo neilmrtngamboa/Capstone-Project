@@ -49,6 +49,10 @@ function Payments () {
         }
     }
 
+    const deletePayment = (paymentID) => {
+        deleteDoc(doc(db,'payments',paymentID))
+    }
+
     return (
         <>
         <h1>This is the payments page</h1>
@@ -78,6 +82,7 @@ function Payments () {
                 status={showPayments.status}
                 date={showPayments.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit'})}
                 paymentID={showPayments.paymentID}
+                deletePayment={deletePayment}
             />
             )
         }
