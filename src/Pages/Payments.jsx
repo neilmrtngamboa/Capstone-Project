@@ -31,6 +31,7 @@ function Payments () {
             onChange={(e) => setPaymentDetails({...paymentDetails, amount: e.target.value})} 
             value={paymentDetails.amount}
             />
+            <button className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400'> Add</button>
         </div>
         
         </>
