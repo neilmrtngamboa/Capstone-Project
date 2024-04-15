@@ -103,6 +103,7 @@ function Home () {
         <br />
         <br />
         <hr />
+        <p>Units Occupied: {tenantList.length}/2</p>
 
         {
             tenantList.map ((showTenants) =>
