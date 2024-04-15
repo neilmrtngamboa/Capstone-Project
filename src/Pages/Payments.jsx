@@ -14,10 +14,13 @@ function Payments () {
         status: 'PAID',
         date: Timestamp.now()
     })
+    const [paymentList, setPaymentList] = useState([])
 
     const addPayment = () => {
         if (paymentDetails.name !== '' || paymentDetails.unit !== '' || paymentDetails.amount !== '' || paymentDetails.amount !== ''){
             addDoc(collection(db,'payments'),paymentDetails).then(() =>{
+                setPaymentList (paymentList => [...paymentList, paymentDetails])
+                alert('data has been successfully added')
                 setPaymentDetails({
                     name: '',
                     unit: '',
