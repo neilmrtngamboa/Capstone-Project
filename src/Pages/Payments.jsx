@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getFirestore, addDoc, collection, Timestamp, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
@@ -9,6 +9,7 @@ function Payments () {
 
     const db = getFirestore(firebaseApp);
     const auth = getAuth(firebaseApp);
+    let navigate = useNavigate();
 
     const [paymentDetails,setPaymentDetails] = useState({
         name: '',
