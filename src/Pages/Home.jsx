@@ -20,6 +20,7 @@ function Home () {
     })
 
     const [tenantList, setTenantList] = useState([])
+    const [editTenantDetails, setEditTenantDetails] = useState(false)
 
     useEffect (() => {
         onAuthStateChanged(auth, (user) => {
@@ -89,6 +90,7 @@ function Home () {
             lastname: lastname,
             unit: unit
         })
+        setEditTenantDetails(true)
 
     }
 
@@ -105,6 +107,8 @@ function Home () {
             lastname: '',
             unit: ''
           })
+
+          setEditTenantDetails(false)
     }
 
     return (
@@ -123,8 +127,16 @@ function Home () {
         <input type="text" placeholder='Unit'
         onChange={(e) => setTenant({...tenant, unit: e.target.value})} value={tenant.unit}
         />
-        <button className='border-2 border-black p-2 bg-blue-500 hover:bg-blue-700' onClick={addTenant}>Add+</button>
-        <button className='border-2 border-black p-2 bg-yellow-500 hover:bg-yellow-700' onClick={updateTenantDetails}>Update</button>
+        {
+            editTenantDetails ? 
+            (
+                <button className='border-2 border-black p-2 bg-yellow-500 hover:bg-yellow-700' onClick={updateTenantDetails}>Update</button>
+            )
+            :
+            (
+                <button className='border-2 border-black p-2 bg-blue-500 hover:bg-blue-700' onClick={addTenant}>Add+</button>
+            )
+        }
         <br />
         <br />
         <hr />
