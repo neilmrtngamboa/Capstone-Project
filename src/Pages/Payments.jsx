@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getFirestore, addDoc, collection, Timestamp, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
 import ListOfPayments from "./ListOfPayments.jsx";
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
 function Payments () {
 
     const db = getFirestore(firebaseApp);
+    const auth = getAuth(firebaseApp);
 
     const [paymentDetails,setPaymentDetails] = useState({
         name: '',
@@ -17,9 +19,20 @@ function Payments () {
     })
     const [paymentList, setPaymentList] = useState([])
     const [totalEarnings, setTotalEarnings] = useState(0)
+    const [userProfile, setUserProfile] = useState({})
 
 
     useEffect (() => {
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserProfile({
+                    email: user.email,
+                })
+            } else {
+                navigate('/login');
+            }
+        });
         
         onSnapshot(collection(db, 'payments'), snapshot => {
             const newPaymentList = [];
