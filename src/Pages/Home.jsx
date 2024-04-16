@@ -100,6 +100,12 @@ function Home () {
             lastname: editTenant.lastname,
             unit: editTenant.unit,
           })
+
+          setEditTenant({
+            firstname: '',
+            lastname: '',
+            unit: ''
+          })
     }
 
     return (
