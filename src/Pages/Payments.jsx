@@ -46,7 +46,6 @@ function Payments () {
                     ...paymentDetails,
                     name: '',
                     unit: '',
-                    amount: 0,
                 })
             
         }else{
@@ -54,9 +53,9 @@ function Payments () {
         }
     }
 
-    const deletePayment = (paymentID) => {
+    const deletePayment = (paymentID, amount) => {
         deleteDoc(doc(db,'payments',paymentID))
-        setTotalEarnings(totalEarnings - parseInt(paymentDetails.amount));
+        setTotalEarnings(totalEarnings - parseInt(amount));
     }
 
     return (
@@ -76,7 +75,7 @@ function Payments () {
             value={paymentDetails.amount}
             />
             <button onClick={addPayment} className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400'> Add</button>
-            <h5>Total Earnings: {totalEarnings}</h5>
+            <h5>Earnings: {totalEarnings}</h5>
         </div>
         
         {
