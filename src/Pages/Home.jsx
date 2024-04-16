@@ -26,7 +26,6 @@ function Home () {
             if (user) {
                 setUserProfile({
                     email: user.email,
-                    username: user.displayName
                 })
             } else {
                 navigate('/login');
