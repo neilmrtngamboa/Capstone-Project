@@ -125,6 +125,7 @@ function Home () {
             unit = {showTenants.unit}
             tenantID = {showTenants.tenantID}
             deleteTenant = {deleteTenant}
+            setUpdate = {setUpdate}
 
             />
             )
