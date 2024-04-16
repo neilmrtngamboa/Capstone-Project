@@ -110,13 +110,13 @@ function Home () {
         <hr />
         <h5>Add a new tenant</h5>
         <input type="text" placeholder='First Name' 
-        onChange={(e) => setTenant({...tenant, firstname: e.target.value})} value={editTenant.firstname}
+        onChange={(e) => setEditTenant({...editTenant, firstname: e.target.value})} value={editTenant.firstname}
         />
         <input type="text" placeholder='Last Name'
-        onChange={(e) => setTenant({...tenant, lastname: e.target.value})} value={editTenant.lastname}
+        onChange={(e) => setEditTenant({...editTenant, lastname: e.target.value})} value={editTenant.lastname}
         />
         <input type="text" placeholder='Unit'
-        onChange={(e) => setTenant({...tenant, unit: e.target.value})} value={editTenant.unit}
+        onChange={(e) => setEditTenant({...editTenant, unit: e.target.value})} value={editTenant.unit}
         />
         <button className='border-2 border-black p-2 bg-blue-500 hover:bg-blue-700' onClick={addTenant}>Add+</button>
         <button className='border-2 border-black p-2 bg-yellow-500 hover:bg-yellow-700' onClick={updateTenantDetails}>Update</button>
