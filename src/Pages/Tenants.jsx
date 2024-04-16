@@ -1,5 +1,5 @@
 
-function Tenants ({firstname, lastname, unit, deleteTenant, tenantID}) {
+function Tenants ({firstname, lastname, unit, deleteTenant, tenantID, setUpdate}) {
     return(
         <>
         <div>
@@ -7,7 +7,7 @@ function Tenants ({firstname, lastname, unit, deleteTenant, tenantID}) {
             <button className='border-2 border-black p-1 bg-red-500 hover:bg-red-600' 
             onClick={() => deleteTenant(tenantID)}>Delete</button>
             <button className='border-2 border-black p-1 bg-green-500 hover:bg-green-800' 
-            >Update</button>
+            onClick={() => setUpdate(tenantID,firstname,lastname,unit)}>Update</button>
 
         </div>
 
