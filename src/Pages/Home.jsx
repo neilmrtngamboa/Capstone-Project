@@ -18,7 +18,6 @@ function Home () {
         lastname: '',
         unit: ''
     })
-    const [editTenant, setEditTenant] = useState({})
 
     const [tenantList, setTenantList] = useState([])
 
