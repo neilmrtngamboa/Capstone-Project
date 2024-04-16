@@ -18,6 +18,7 @@ function Home () {
         lastname: '',
         unit: ''
     })
+    const [editTenant, setEditTenant] = useState({})
 
     const [tenantList, setTenantList] = useState([])
 
@@ -80,6 +81,16 @@ function Home () {
 
     const deleteTenant = (tenantID) => {
         deleteDoc(doc(db,'tenants',tenantID))
+    }
+
+    const setUpdate = (tenantID,firstname,lastname,unit) => {
+        setEditTenant({
+            tenantID: tenantID,
+            firstname: firstname,
+            lastname: lastname,
+            unit: unit
+        })
+
     }
 
     return (
