@@ -83,10 +83,6 @@ function Home () {
         deleteDoc(doc(db,'tenants',tenantID))
     }
 
-    const goToPayments = () => {
-        navigate('/payments')
-    }
-
     return (
         <>
 
