@@ -21,8 +21,6 @@ function Payments () {
 
     useEffect (() => {
         
-        setTotalEarnings(totalEarnings + parseInt(paymentDetails.amount));
-
         onSnapshot(collection(db, 'payments'), snapshot => {
             const newPaymentList = [];
 
