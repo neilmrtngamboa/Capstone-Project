@@ -1,28 +1,30 @@
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, Timestamp } from 'firebase/firestore'
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import Tenants from './Tenants.jsx';
 
 
-function Home () {
+function Home() {
 
     let navigate = useNavigate();
     const auth = getAuth(firebaseApp);
     const db = getFirestore(firebaseApp)
     const [userProfile, setUserProfile] = useState({})
 
-    const [tenant,setTenant] = useState({
+    const [tenant, setTenant] = useState({
         firstname: '',
         lastname: '',
-        unit: ''
+        unit: '',
+        date: Timestamp.now()
     })
 
     const [tenantList, setTenantList] = useState([])
     const [editTenantDetails, setEditTenantDetails] = useState(false)
+    const [timeEdited, setTimeEdited] = useState(false)
 
-    useEffect (() => {
+    useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUserProfile({
@@ -32,7 +34,7 @@ function Home () {
                 navigate('/login');
             }
         });
-    
+
         onSnapshot(collection(db, 'tenants'), snapshot => {
             const newOccupiedList = [];
 
@@ -56,21 +58,24 @@ function Home () {
 
     const addTenant = () => {
 
-        if (tenant.firstname === '' || tenant.lastname === '' || tenant.unit === ''){
+        if (tenant.firstname === '' || tenant.lastname === '' || tenant.unit === '') {
             alert('please fill out the empty fields')
-        }else{
-            if ( 2 > tenantList.length) {
-            addDoc(collection(db,'tenants'),tenant);
-            setTenantList (tenantList => [...tenantList, tenant])
-            alert('data has been successfully added!')
-            setTenant({
-                firstname: '',
-                lastname: '',
-                unit: '',
-            })
-            }else {
+        } else {
+            if (2 > tenantList.length) {
+                addDoc(collection(db, 'tenants'), tenant);
+                setTenantList(tenantList => [...tenantList, tenant])
+                alert('data has been successfully added!')
+                setTimeEdited(false)
+                setTenant({
+                    ...tenant,
+                    firstname: '',
+                    lastname: '',
+                    unit: '',
+                })
+            } else {
                 alert('All of the units have been occupied!');
                 setTenant({
+                    ...tenant,
                     firstname: '',
                     lastname: '',
                     unit: '',
@@ -80,83 +85,88 @@ function Home () {
     }
 
     const deleteTenant = (tenantID) => {
-        deleteDoc(doc(db,'tenants',tenantID))
+        deleteDoc(doc(db, 'tenants', tenantID))
     }
 
-    const setUpdate = (tenantID,firstname,lastname,unit) => {
+    const setUpdate = (tenantID, firstname, lastname, unit) => {
         setTenant({
             tenantID: tenantID,
             firstname: firstname,
             lastname: lastname,
-            unit: unit
+            unit: unit,
+            date: Timestamp.now()
         })
         setEditTenantDetails(true)
-
+        setTimeEdited(true)
     }
 
     const updateTenantDetails = () => {
 
-        updateDoc(doc(db,'tenants',tenant.tenantID), { 
+        updateDoc(doc(db, 'tenants', tenant.tenantID), {
             firstname: tenant.firstname,
             lastname: tenant.lastname,
             unit: tenant.unit,
-          })
+            date: tenant.date
+        })
 
-          setTenant({
+        setTenant({
+            ...tenant,
             firstname: '',
             lastname: '',
-            unit: ''
-          })
+            unit: '',
+        })
 
-          setEditTenantDetails(false)
+        setEditTenantDetails(false)
     }
 
     return (
         <>
 
-        <h1>Home Page</h1>
-        <button className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400' onClick={Logout}>Logout</button>
-        <hr />
-        <h5>Add a new tenant</h5>
-        <input type="text" placeholder='First Name' 
-        onChange={(e) => setTenant({...tenant, firstname: e.target.value})} value={tenant.firstname}
-        />
-        <input type="text" placeholder='Last Name'
-        onChange={(e) => setTenant({...tenant, lastname: e.target.value})} value={tenant.lastname}
-        />
-        <input type="text" placeholder='Unit'
-        onChange={(e) => setTenant({...tenant, unit: e.target.value})} value={tenant.unit}
-        />
-        {
-            editTenantDetails ? 
-            (
-                <button className='border-2 border-black p-2 bg-yellow-500 hover:bg-yellow-700' onClick={updateTenantDetails}>Update</button>
-            )
-            :
-            (
-                <button className='border-2 border-black p-2 bg-blue-500 hover:bg-blue-700' onClick={addTenant}>Add+</button>
-            )
-        }
-        <br />
-        <br />
-        <hr />
-        <p>Units Occupied: {tenantList.length}/2</p>
-        <Link to='/payments' className='text-blue-500 underline hover:no-underline hover:text-blue-700'>Payments</Link>
-
-        {
-            tenantList.map ((showTenants) =>
-            <Tenants 
-            key = {showTenants.id}
-            firstname = {showTenants.firstname}
-            lastname = {showTenants.lastname}
-            unit = {showTenants.unit}
-            tenantID = {showTenants.tenantID}
-            deleteTenant = {deleteTenant}
-            setUpdate = {setUpdate}
-
+            <h1>Home Page</h1>
+            <button className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400' onClick={Logout}>Logout</button>
+            <hr />
+            <h5>Add a new tenant</h5>
+            <input type="text" placeholder='First Name'
+                onChange={(e) => setTenant({ ...tenant, firstname: e.target.value })} value={tenant.firstname}
             />
-            )
-        }
+            <input type="text" placeholder='Last Name'
+                onChange={(e) => setTenant({ ...tenant, lastname: e.target.value })} value={tenant.lastname}
+            />
+            <input type="text" placeholder='Unit'
+                onChange={(e) => setTenant({ ...tenant, unit: e.target.value })} value={tenant.unit}
+            />
+            {
+                editTenantDetails ?
+                    (
+                        <button className='border-2 border-black p-2 bg-yellow-500 hover:bg-yellow-700' onClick={updateTenantDetails}>Update</button>
+                    )
+                    :
+                    (
+                        <button className='border-2 border-black p-2 bg-blue-500 hover:bg-blue-700' onClick={addTenant}>Add+</button>
+                    )
+            }
+            <br />
+            <br />
+            <hr />
+            <p>Units Occupied: {tenantList.length}/2</p>
+            <Link to='/payments' className='text-blue-500 underline hover:no-underline hover:text-blue-700'>Payments</Link>
+
+            {
+                tenantList.map((showTenants) =>
+                    <Tenants
+                        key={showTenants.id}
+                        firstname={showTenants.firstname}
+                        lastname={showTenants.lastname}
+                        unit={showTenants.unit}
+                        tenantID={showTenants.tenantID}
+                        deleteTenant={deleteTenant}
+                        setUpdate={setUpdate}
+                        timeEdited={timeEdited}
+                        date={showTenants.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit'})}
+
+                    />
+                )
+            }
         </>
     )
 }
