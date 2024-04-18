@@ -11,9 +11,9 @@ function Tenants({ firstname, lastname, unit, deleteTenant, tenantID, setUpdate,
                             <span className="text-md font-light">Edited at: </span>
                             <span className="text-md font-semibold">{date}</span>
 
-                            <div className="grid grid-cols-2 gap-5 mt-3">
+                            <div className="mt-3">
                                 <button className='rounded shadow-lg bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 border-b-4 
-                                border-red-600 hover:border-red-800'
+                                border-red-600 hover:border-red-800 me-2'
                                     onClick={() => deleteTenant(tenantID)}>Delete</button>
                                 <button className='rounded shadow-lg bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 border-b-4 
                                 border-emerald-600 hover:border-emerald-800'
