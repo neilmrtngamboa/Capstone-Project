@@ -156,7 +156,7 @@ function Home() {
             <h3 className='text-3xl flex justify-center mt-12 tracking-wider'
             >Units Occupied: {tenantList.length}/2</h3>
 
-            <div className='grid grid-cols-2 sm:grid sm:grid-cols-3 mt-10'>
+            <div className='grid grid-cols-2 gap-4 sm:grid sm:grid-cols-3 mt-10'>
 
                 {
                     tenantList.map((showTenants) =>
