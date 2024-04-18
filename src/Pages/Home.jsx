@@ -120,54 +120,65 @@ function Home() {
     }
 
     return (
-        <>
+        <main className='bg-sky-50 p-5'>
+            <div className='flex mt-4 p-3'>
+                <Link to='/' className='font-semibold sm:text-2xl'> Home </Link>
+                <Link to='/payments' className='sm:text-2xl font-extralight ms-3'>Payments</Link>
+                <button className='ms-auto sm:text-lg ' onClick={Logout}>Logout</button>
+            </div>
 
-            <h1>Home Page</h1>
-            <button className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400' onClick={Logout}>Logout</button>
-            <hr />
-            <h5>Add a new tenant</h5>
-            <input type="text" placeholder='First Name'
-                onChange={(e) => setTenant({ ...tenant, firstname: e.target.value })} value={tenant.firstname}
-            />
-            <input type="text" placeholder='Last Name'
-                onChange={(e) => setTenant({ ...tenant, lastname: e.target.value })} value={tenant.lastname}
-            />
-            <input type="text" placeholder='Unit'
-                onChange={(e) => setTenant({ ...tenant, unit: e.target.value })} value={tenant.unit}
-            />
+            <h5 className='flex justify-center mb-5 font-semibold text-lg'>Add a new tenant</h5>
+            <div className='grid grid-cols-3 gap-2'>
+                <input type="text" placeholder='First Name' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
+                    onChange={(e) => setTenant({ ...tenant, firstname: e.target.value })} value={tenant.firstname}
+                />
+                <input type="text" placeholder='Last Name' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
+                    onChange={(e) => setTenant({ ...tenant, lastname: e.target.value })} value={tenant.lastname}
+                />
+                <input type="text" placeholder='Unit' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
+                    onChange={(e) => setTenant({ ...tenant, unit: e.target.value })} value={tenant.unit}
+                />
+
+            </div>
             {
                 editTenantDetails ?
                     (
-                        <button className='border-2 border-black p-2 bg-yellow-500 hover:bg-yellow-700' onClick={updateTenantDetails}>Update</button>
+                        <button className='mt-5 flex mx-auto py-2 px-4 bg-yellow-400 text-black font-thin rounded shadow-md hover:bg-yellow-500 hover:shadow-none hover:text-white'
+                            onClick={updateTenantDetails}>Update</button>
                     )
                     :
                     (
-                        <button className='border-2 border-black p-2 bg-blue-500 hover:bg-blue-700' onClick={addTenant}>Add+</button>
+                        <button className='mt-5 flex mx-auto py-2 px-4 bg-sky-950 text-white font-thin rounded shadow-md hover:bg-sky-800 hover:shadow-none'
+                            onClick={addTenant}>Add+</button>
                     )
             }
-            <br />
-            <br />
-            <hr />
-            <p>Units Occupied: {tenantList.length}/2</p>
-            <Link to='/payments' className='text-blue-500 underline hover:no-underline hover:text-blue-700'>Payments</Link>
 
-            {
-                tenantList.map((showTenants) =>
-                    <Tenants
-                        key={showTenants.id}
-                        firstname={showTenants.firstname}
-                        lastname={showTenants.lastname}
-                        unit={showTenants.unit}
-                        tenantID={showTenants.tenantID}
-                        deleteTenant={deleteTenant}
-                        setUpdate={setUpdate}
-                        timeEdited={timeEdited}
-                        date={showTenants.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit'})}
+            <h3 className='text-3xl flex justify-center mt-12 tracking-wider'
+            >Units Occupied: {tenantList.length}/2</h3>
 
-                    />
-                )
-            }
-        </>
+            <div className='grid grid-cols-2 sm:grid sm:grid-cols-3 mt-10'>
+
+                {
+                    tenantList.map((showTenants) =>
+                        <Tenants
+                            key={showTenants.id}
+                            firstname={showTenants.firstname}
+                            lastname={showTenants.lastname}
+                            unit={showTenants.unit}
+                            tenantID={showTenants.tenantID}
+                            deleteTenant={deleteTenant}
+                            setUpdate={setUpdate}
+                            timeEdited={timeEdited}
+                            date={showTenants.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}
+
+                        />
+                    )
+                }
+
+            </div>
+
+
+        </main>
     )
 }
 export default Home;
