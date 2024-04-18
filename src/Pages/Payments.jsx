@@ -5,13 +5,13 @@ import { getFirestore, addDoc, collection, Timestamp, onSnapshot, deleteDoc, doc
 import ListOfPayments from "./ListOfPayments.jsx";
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
-function Payments () {
+function Payments() {
 
     const db = getFirestore(firebaseApp);
     const auth = getAuth(firebaseApp);
     let navigate = useNavigate();
 
-    const [paymentDetails,setPaymentDetails] = useState({
+    const [paymentDetails, setPaymentDetails] = useState({
         name: '',
         unit: '',
         amount: 0,
@@ -23,7 +23,7 @@ function Payments () {
     const [userProfile, setUserProfile] = useState({})
 
 
-    useEffect (() => {
+    useEffect(() => {
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -34,7 +34,7 @@ function Payments () {
                 navigate('/login');
             }
         });
-        
+
         onSnapshot(collection(db, 'payments'), snapshot => {
             const newPaymentList = [];
 
@@ -50,63 +50,68 @@ function Payments () {
     }, [])
 
     const addPayment = () => {
-        if (paymentDetails.name !== '' || paymentDetails.unit !== '' || paymentDetails.amount !== '' 
-            || paymentDetails.amount != ''){
-            addDoc(collection(db,'payments'),paymentDetails)
-                setPaymentList (paymentList => [...paymentList, paymentDetails])
-                setTotalEarnings(totalEarnings + parseInt(paymentDetails.amount));
-                alert('data has been successfully added')
-                setPaymentDetails({
-                    ...paymentDetails,
-                    name: '',
-                    unit: '',
-                })
-            
-        }else{
+        if (paymentDetails.name !== '' || paymentDetails.unit !== '' || paymentDetails.amount !== ''
+            || paymentDetails.amount != '') {
+            addDoc(collection(db, 'payments'), paymentDetails)
+            setPaymentList(paymentList => [...paymentList, paymentDetails])
+            setTotalEarnings(totalEarnings + parseInt(paymentDetails.amount));
+            alert('data has been successfully added')
+            setPaymentDetails({
+                ...paymentDetails,
+                name: '',
+                unit: '',
+            })
+
+        } else {
             alert('Please fill out the empty fields')
         }
     }
 
     const deletePayment = (paymentID, amount) => {
-        deleteDoc(doc(db,'payments',paymentID))
+        deleteDoc(doc(db, 'payments', paymentID))
         setTotalEarnings(totalEarnings - parseInt(amount));
     }
 
     return (
-        <>
-        <h1>This is the payments page</h1>
-        <Link to='/' className='text-blue-500 underline hover:no-underline hover:text-blue-700'>Owner Dashboard</Link>
+        <section className="bg-blue-100 p-5">
 
-        <div>
-            <input type="text" placeholder="Name" onChange={(e) => setPaymentDetails({...paymentDetails, name: e.target.value})} 
-            value={paymentDetails.name} 
-            />
-            <input type="text" placeholder="Unit" onChange={(e) => setPaymentDetails({...paymentDetails, unit: e.target.value})} 
-            value={paymentDetails.unit}
-            />
-            <input type="number" placeholder="Amount"
-            onChange={(e) => setPaymentDetails({...paymentDetails, amount: e.target.value})} 
-            value={paymentDetails.amount}
-            />
-            <button onClick={addPayment} className='border-2 border-black p-2 bg-sky-200 hover:bg-sky-400'> Add</button>
-            <h5>Earnings: {totalEarnings}</h5>
-        </div>
-        
-        {
-            paymentList.map ((showPayments) => 
-            <ListOfPayments 
-                key={showPayments.id}
-                name={showPayments.name}
-                unit={showPayments.unit}
-                amount={showPayments.amount}
-                status={showPayments.status}
-                date={showPayments.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit'})}
-                paymentID={showPayments.paymentID}
-                deletePayment={deletePayment}
-            />
-            )
-        }
-        </>
+            <Link to='/' className='text-blue-500 underline hover:no-underline hover:text-blue-700'>Owner Dashboard</Link>
+
+            <div className="grid grid-cols-3 gap-1 mt-5 p-3">
+                <input type="text" placeholder="Name" onChange={(e) => setPaymentDetails({ ...paymentDetails, name: e.target.value })}
+                    value={paymentDetails.name} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight 
+                    focus:outline-none focus:shadow-outline'
+                />
+                <input type="text" placeholder="Unit" onChange={(e) => setPaymentDetails({ ...paymentDetails, unit: e.target.value })}
+                    value={paymentDetails.unit} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight 
+                    focus:outline-none focus:shadow-outline'
+                />
+                <input type="number" placeholder="Amount"
+                    onChange={(e) => setPaymentDetails({ ...paymentDetails, amount: e.target.value })}
+                    value={paymentDetails.amount} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight 
+                    focus:outline-none focus:shadow-outline'
+                />
+            </div>
+
+            <button onClick={addPayment} className='flex mx-auto bg-white hover:bg-gray-100 text-gray-800 
+                font-semibold py-2 px-4 border border-gray-400 rounded shadow'> Add Payment</button>
+            <h5 className="flex justify-center mt-5 text-2xl font-semibold">Earnings: {totalEarnings}</h5>
+                            
+            {
+                paymentList.map((showPayments) =>
+                    <ListOfPayments
+                        key={showPayments.id}
+                        name={showPayments.name}
+                        unit={showPayments.unit}
+                        amount={showPayments.amount}
+                        status={showPayments.status}
+                        date={showPayments.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}
+                        paymentID={showPayments.paymentID}
+                        deletePayment={deletePayment}
+                    />
+                )
+            }
+        </section>
     )
 }
 export default Payments;
