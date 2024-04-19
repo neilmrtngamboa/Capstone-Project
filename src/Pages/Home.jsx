@@ -52,12 +52,22 @@ function Home() {
     const addTenant = () => {
 
         if (tenant.firstname === '' || tenant.lastname === '' || tenant.unit === '') {
-            alert('please fill out the empty fields')
+            Swal.fire({
+                title: 'Add Tenant Error!',
+                text:  'Please fill out the empty fields!',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+              })
         } else {
             if (2 > tenantList.length) {
                 addDoc(collection(db, 'tenants'), tenant);
                 setTenantList(tenantList => [...tenantList, tenant])
-                alert('data has been successfully added!')
+                Swal.fire({
+                    title: 'Add Tenant Successful',
+                    text:  'Data has been added',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                  })
                 setTimeEdited(false)
                 setTenant({
                     ...tenant,
@@ -66,7 +76,12 @@ function Home() {
                     unit: '',
                 })
             } else {
-                alert('All of the units have been occupied!');
+                Swal.fire({
+                    title: 'Add Tenant Error!',
+                    text:  'All of the units have been occupied',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                  })
                 setTenant({
                     ...tenant,
                     firstname: '',
@@ -78,6 +93,14 @@ function Home() {
     }
 
     const deleteTenant = (tenantID) => {
+
+        Swal.fire({
+            title: 'Delete successful',
+            text:  'Data has been removed',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+
         deleteDoc(doc(db, 'tenants', tenantID))
     }
 
@@ -101,6 +124,13 @@ function Home() {
             unit: tenant.unit,
             date: tenant.date
         })
+
+        Swal.fire({
+            title: 'Update successful!',
+            text:  'Data has been updated',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
 
         setTenant({
             ...tenant,

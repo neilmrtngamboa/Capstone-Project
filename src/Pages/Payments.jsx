@@ -4,6 +4,7 @@ import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getFirestore, addDoc, collection, Timestamp, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
 import ListOfPayments from "./ListOfPayments.jsx";
 import { getAuth, onAuthStateChanged} from 'firebase/auth';
+import Swal from "sweetalert2";
 
 function Payments() {
 
@@ -53,12 +54,22 @@ function Payments() {
         if (paymentDetails.name === '' || paymentDetails.unit === '' || paymentDetails.amount === 0
             || paymentDetails.amount === '') {
                 
-                alert('Please fill out the empty fields')
+                Swal.fire({
+                    title: 'Process Failed!',
+                    text: 'Please fill out the empty fields!',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                  })
         } else {
             addDoc(collection(db, 'payments'), paymentDetails)
             setPaymentList(paymentList => [...paymentList, paymentDetails])
             setTotalEarnings(totalEarnings + parseInt(paymentDetails.amount));
-            alert('data has been successfully added')
+            Swal.fire({
+                title: 'Payment added!',
+                text: 'Data has been successfully added!',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+              })
             setPaymentDetails({
                 ...paymentDetails,
                 name: '',
