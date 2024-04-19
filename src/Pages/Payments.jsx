@@ -50,8 +50,11 @@ function Payments() {
     }, [])
 
     const addPayment = () => {
-        if (paymentDetails.name !== '' || paymentDetails.unit !== '' || paymentDetails.amount !== ''
-            || paymentDetails.amount != '') {
+        if (paymentDetails.name === '' || paymentDetails.unit === '' || paymentDetails.amount === 0
+            || paymentDetails.amount === '') {
+                
+                alert('Please fill out the empty fields')
+        } else {
             addDoc(collection(db, 'payments'), paymentDetails)
             setPaymentList(paymentList => [...paymentList, paymentDetails])
             setTotalEarnings(totalEarnings + parseInt(paymentDetails.amount));
@@ -61,9 +64,6 @@ function Payments() {
                 name: '',
                 unit: '',
             })
-
-        } else {
-            alert('Please fill out the empty fields')
         }
     }
 
