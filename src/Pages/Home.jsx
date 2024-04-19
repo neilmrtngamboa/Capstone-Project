@@ -49,13 +49,6 @@ function Home() {
 
     }, [])
 
-    const Logout = () => {
-        signOut(auth).then(() => {
-            navigate('/login');
-        })
-
-    }
-
     const addTenant = () => {
 
         if (tenant.firstname === '' || tenant.lastname === '' || tenant.unit === '') {
@@ -120,12 +113,7 @@ function Home() {
     }
 
     return (
-        <main className='bg-sky-50 p-5'>
-            <div className='flex mt-4 p-3'>
-                <Link to='/' className='font-semibold sm:text-2xl'> Home </Link>
-                <Link to='/payments' className='sm:text-2xl font-extralight ms-3'>Payments</Link>
-                <button className='ms-auto sm:text-lg ' onClick={Logout}>Logout</button>
-            </div>
+        <main className='bg-indigo-50 p-5'>
 
             <h5 className='flex justify-center mb-5 font-semibold text-lg'>Add a new tenant</h5>
             <div className='grid grid-cols-3 gap-2'>
