@@ -66,7 +66,7 @@ function Login() {
   return (
     <>
       <div className="max-w-xs mt-44 mx-auto">
-        <div className=' bg-blue-100 shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+        <div className=' bg-indigo-300 shadow-md rounded px-8 pt-6 pb-8 mb-4'>
 
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Username:</label>
@@ -87,13 +87,12 @@ function Login() {
 
           <div className="flex justify-center">
             <button onClick={Login}
-            className="bg-blue-200 text-black py-2 px-4 rounded shadow-md font-bold hover:bg-blue-400 hover:shadow-none hover:text-white" 
+            className="bg-indigo-200 text-black py-2 px-4 rounded shadow-md font-bold hover:bg-indigo-400 hover:shadow-none hover:text-white" 
             >Login</button>
           </div>
 
         </div>
         <p className="text-xs text-center text-gray-400">Apartment Management System ©2024</p>
-        <p className="text-xs text-center text-gray-400 mt-2">Developed by: Neil Martin Gamboa</p>
       </div>
 
 
