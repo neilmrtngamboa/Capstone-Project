@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { useState, useEffect } from 'react';
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx';
+import Swal from "sweetalert2";
 
 function Login() {
 
@@ -31,15 +32,31 @@ function Login() {
         .then((userCredential) => {
 
           const user = userCredential.user;
-          alert('sign in successful')
+          Swal.fire({
+            title: 'Sign in successful!',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
           navigate('/');
         })
         .catch((error) => {
-          alert('sign in failed')
+          Swal.fire({
+            title: 'Sign in failed',
+            text: 'Incorrect credentials!',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          })
+          setEmail('')
+          setPassword('')
         });
 
     } else {
-      alert('please fill out the empty fields')
+      Swal.fire({
+        title: 'Sign in failed',
+        text: 'Please fill out the empty fields!',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
     }
 
 
