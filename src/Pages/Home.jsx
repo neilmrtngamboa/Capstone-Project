@@ -136,7 +136,8 @@ function Home() {
                     )
                     :
                     (
-                        <button className='mt-5 flex mx-auto py-2 px-4 bg-sky-950 text-white font-thin rounded shadow-md hover:bg-sky-800 hover:shadow-none'
+                        <button className='mt-5 flex mx-auto py-2 px-4 rounded shadow-lg bg-indigo-700 hover:bg-indigo-800 text-white font-bold border-b-4 
+                        border-indigo-800 hover:border-indigo-950'
                             onClick={addTenant}>Add+</button>
                     )
             }
