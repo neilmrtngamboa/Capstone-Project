@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getFirestore, addDoc, collection, Timestamp, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
 import ListOfPayments from "./ListOfPayments.jsx";
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged} from 'firebase/auth';
 
 function Payments() {
 
@@ -92,8 +92,8 @@ function Payments() {
                 />
             </div>
 
-            <button onClick={addPayment} className='flex mx-auto bg-white hover:bg-gray-100 text-gray-800 
-                font-semibold py-2 px-4 border border-gray-400 rounded shadow'> Add Payment</button>
+            <button onClick={addPayment} className='mt-5 flex mx-auto py-2 px-4 rounded shadow-lg bg-indigo-700 hover:bg-indigo-800 text-white font-bold border-b-4 
+                        border-indigo-800 hover:border-indigo-950'> Add Payment</button>
             <h5 className="flex justify-center mt-5 text-2xl font-semibold">Earnings: {totalEarnings}</h5>
                             
             {
