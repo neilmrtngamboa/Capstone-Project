@@ -87,7 +87,7 @@ function Login() {
 
           <div className="flex justify-center">
             <button onClick={Login}
-            className="bg-indigo-200 text-black py-2 px-4 rounded shadow-md font-bold hover:bg-indigo-400 hover:shadow-none hover:text-white" 
+            className="bg-indigo-200 text-gray-700 py-2 px-4 rounded shadow-md font-bold hover:bg-indigo-400 hover:shadow-none hover:text-white" 
             >Login</button>
           </div>
 
