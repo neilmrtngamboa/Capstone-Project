@@ -51,6 +51,9 @@ function Layout () {
                         <Link to='/payments' class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-violet-800 mr-4">
                             Payments
                         </Link>
+                        <Link to='/movedtenants' class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-violet-800 mr-4">
+                            Former Tenants
+                        </Link>
                         </>
                         :
                         <></>
