@@ -73,10 +73,9 @@ function Payments() {
     }
 
     return (
-        <section className="bg-blue-100 p-5">
+        <section className="bg-indigo-50 p-5">
 
-            <Link to='/' className='text-blue-500 underline hover:no-underline hover:text-blue-700'>Owner Dashboard</Link>
-
+            <h1 className="flex justify-center md:text-3xl font-semibold">Payments</h1>
             <div className="grid grid-cols-3 gap-1 mt-5 p-3">
                 <input type="text" placeholder="Name" onChange={(e) => setPaymentDetails({ ...paymentDetails, name: e.target.value })}
                     value={paymentDetails.name} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight 
