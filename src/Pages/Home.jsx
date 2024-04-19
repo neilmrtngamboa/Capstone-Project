@@ -131,7 +131,8 @@ function Home() {
             {
                 editTenantDetails ?
                     (
-                        <button className='mt-5 flex mx-auto py-2 px-4 bg-yellow-400 text-black font-thin rounded shadow-md hover:bg-yellow-500 hover:shadow-none hover:text-white'
+                        <button className='mt-5 flex mx-auto py-2 px-4 rounded shadow-lg bg-indigo-500 hover:bg-indigo-700 text-white font-bold border-b-4 
+                        border-indigo-800 hover:border-indigo-950'
                             onClick={updateTenantDetails}>Update</button>
                     )
                     :
