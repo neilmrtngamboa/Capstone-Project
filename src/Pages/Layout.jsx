@@ -88,10 +88,10 @@ function Layout () {
                         </Link>
                         <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-400 sm:mb-0">
                             <li>
-                                <a href="https://github.com/neilmrtngamboa" class="hover:underline me-4 md:me-6">GitHub</a>
+                                <a href="https://github.com/neilmrtngamboa" target="blank" class="hover:underline me-4 md:me-6">GitHub</a>
                             </li>
                             <li>
-                                <a href="https://www.linkedin.com/in/neilmartingamboa/" class="hover:underline me-4 md:me-6">LinkedIn</a>
+                                <a href="https://www.linkedin.com/in/neilmartingamboa/" target="blank" class="hover:underline me-4 md:me-6">LinkedIn</a>
                             </li>
                         </ul>
                     </div>
