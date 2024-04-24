@@ -1,6 +1,6 @@
 function ListOfPayments ({name, unit, amount, status, date, paymentID, deletePayment}) {
     return(
-        <>
+        <main>
         <div className="border-2 border-slate-400 p-5 rounded shadow-md mt-5">
             <h4 className="font-light">Name: <b className="font-semibold me-1">{name}</b> 
             Unit: <b className="font-semibold">{unit}</b> Amount: <b className="font-semibold me-1">{amount}</b> 
@@ -10,7 +10,7 @@ function ListOfPayments ({name, unit, amount, status, date, paymentID, deletePay
             onClick={() => deletePayment(paymentID,amount)}>Delete Payment</button>
 
         </div>
-        </>
+        </main>
     )
 }
 export default ListOfPayments;
