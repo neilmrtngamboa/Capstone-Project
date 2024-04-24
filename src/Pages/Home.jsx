@@ -18,6 +18,7 @@ function Home() {
         firstname: '',
         lastname: '',
         unit: '',
+        phonenumber: '',
         date: Timestamp.now()
     })
 
@@ -52,7 +53,7 @@ function Home() {
 
     const addTenant = () => {
 
-        if (tenant.firstname === '' || tenant.lastname === '' || tenant.unit === '') {
+        if (tenant.firstname === '' || tenant.lastname === '' || tenant.unit === '' || tenant.phonenumber === '') {
             Swal.fire({
                 title: 'Add Tenant Error!',
                 text:  'Please fill out the empty fields!',                         //Alert if the inputed values are empty
@@ -75,6 +76,7 @@ function Home() {
                     firstname: '',
                     lastname: '',                                                   //Clear the values after adding data
                     unit: '',
+                    phonenumber: ''
                 })
             } else {
                 Swal.fire({
@@ -88,6 +90,7 @@ function Home() {
                     firstname: '',                                                  //Clear the values
                     lastname: '',
                     unit: '',
+                    phonenumber: ''
                 })
             }
         }
@@ -105,13 +108,15 @@ function Home() {
         deleteDoc(doc(db, 'tenants', tenantID))                                 //Delete the specific data 
     }
 
-    const setUpdate = (tenantID, firstname, lastname, unit) => {                //Setup update
+    const setUpdate = (tenantID, firstname, lastname, unit, phonenumber) => {                //Setup update
         setTenant({
             tenantID: tenantID,
             firstname: firstname,                                               //set the values to specific data
             lastname: lastname,
             unit: unit,
+            phonenumber: phonenumber,
             date: Timestamp.now()
+            
         })
         setEditTenantDetails(true)
         setTimeEdited(true)
@@ -123,7 +128,8 @@ function Home() {
             firstname: tenant.firstname,
             lastname: tenant.lastname,
             unit: tenant.unit,
-            date: tenant.date
+            date: tenant.date,
+            phonenumber: tenant.phonenumber
         })
 
         Swal.fire({
@@ -138,6 +144,7 @@ function Home() {
             firstname: '',                                                      //Clear the values
             lastname: '',
             unit: '',
+            phonenumber: ''
         })
 
         setEditTenantDetails(false)
@@ -156,6 +163,9 @@ function Home() {
                 />
                 <input type="text" placeholder='Unit' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
                     onChange={(e) => setTenant({ ...tenant, unit: e.target.value })} value={tenant.unit}
+                />
+                <input type="text" placeholder='Phone Number' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
+                    onChange={(e) => setTenant({ ...tenant, phonenumber: e.target.value })} value={tenant.phonenumber}
                 />
 
             </div>
@@ -190,6 +200,7 @@ function Home() {
                             deleteTenant={deleteTenant}
                             setUpdate={setUpdate}
                             timeEdited={timeEdited}
+                            phonenumber={showTenants.phonenumber}
                             date={showTenants.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}
                             //convert the date(Timestamp) to a date and to a string
                         />
