@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { useState, useEffect } from 'react';
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx';
@@ -89,6 +89,13 @@ function Login() {
             <button onClick={Login}
             className="bg-indigo-200 text-gray-700 py-2 px-4 rounded shadow-md font-bold hover:bg-indigo-400 hover:shadow-none hover:text-white" 
             >Login</button>
+          </div>
+
+          <div className="flex justify-center mt-3">
+            <button
+            className="bg-gray-200 text-gray-700 py-2 px-4 rounded shadow-md font-bold hover:bg-indigo-400 hover:shadow-none hover:text-white" 
+            > <Link to='/guestview'>Guest View</Link>
+            </button>
           </div>
 
         </div>
