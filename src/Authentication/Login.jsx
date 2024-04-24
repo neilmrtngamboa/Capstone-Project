@@ -12,8 +12,8 @@ function Login() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    const auth = getAuth(firebaseApp);
-    onAuthStateChanged(auth, (user) => {
+    const auth = getAuth(firebaseApp);              //Fetch API key 
+    onAuthStateChanged(auth, (user) => {            //Condition if the user is logged in
       if (user) {
         navigate('/')
       } else {
@@ -23,17 +23,17 @@ function Login() {
 
   }, [])
 
-  const Login = () => {
+  const Login = () => {                           //Login function 
 
-    if (email !== '' && password !== '') {
+    if (email !== '' && password !== '') {                    //Condition if the email and password is empty
 
       const auth = getAuth(firebaseApp);
-      signInWithEmailAndPassword(auth, email, password)
+      signInWithEmailAndPassword(auth, email, password)      //Firebase auth function
         .then((userCredential) => {
 
           const user = userCredential.user;
           Swal.fire({
-            title: 'Sign in successful!',
+            title: 'Sign in successful!',                    //Alert when the sign in is successful
             icon: 'success',
             confirmButtonText: 'Ok'
           })
@@ -41,19 +41,19 @@ function Login() {
         })
         .catch((error) => {
           Swal.fire({
-            title: 'Sign in failed',
+            title: 'Sign in failed',                        //Alert when the sign in is unsuccessful
             text: 'Incorrect credentials!',
             icon: 'error',
             confirmButtonText: 'Ok'
           })
-          setEmail('')
+          setEmail('')                                      //Clear the values after logging in
           setPassword('')
         });
 
     } else {
       Swal.fire({
         title: 'Sign in failed',
-        text: 'Please fill out the empty fields!',
+        text: 'Please fill out the empty fields!',          //Alert if the fields are empty 
         icon: 'error',
         confirmButtonText: 'Ok'
       })
@@ -73,7 +73,7 @@ function Login() {
 
             <input type="email" placeholder='Email' id="email"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:bg-blue-100 focus:text-black"
-              onChange={(e) => setEmail(e.target.value)} value={email}
+              onChange={(e) => setEmail(e.target.value)} value={email}    //Applied onChange to target the input value of the email
             />
           </div>
 
@@ -81,12 +81,12 @@ function Login() {
             <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Password:</label>
             <input type="password" placeholder='Password' id="password"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:bg-blue-100"
-              onChange={(e) => setPassword(e.target.value)} value={password}
+              onChange={(e) => setPassword(e.target.value)} value={password}  //Applied onChange to target the input value of the password
             />
           </div>
 
           <div className="flex justify-center">
-            <button onClick={Login}
+            <button onClick={Login}               //Applied onClick to call the Login function
             className="bg-indigo-200 text-gray-700 py-2 px-4 rounded shadow-md font-bold hover:bg-indigo-400 hover:shadow-none hover:text-white" 
             >Login</button>
           </div>
@@ -94,7 +94,7 @@ function Login() {
           <div className="flex justify-center mt-3">
             <button
             className="bg-gray-200 text-gray-700 py-2 px-4 rounded shadow-md font-bold hover:bg-indigo-400 hover:shadow-none hover:text-white" 
-            > <Link to='/guestview'>Guest View</Link>
+            > <Link to='/guestview'>Guest View</Link>               
             </button>
           </div>
 
