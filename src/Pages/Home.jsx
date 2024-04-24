@@ -154,7 +154,7 @@ function Home() {
         <main className='bg-indigo-50 p-5'>
 
             <h5 className='flex justify-center mb-5 font-semibold text-lg lg:text-3xl'>Add a new tenant</h5>
-            <div className='grid grid-cols-3 gap-2'>
+            <div className='grid lg:grid-cols-4 sm:grid-cols-3 gap-2'>
                 <input type="text" placeholder='First Name' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
                     onChange={(e) => setTenant({ ...tenant, firstname: e.target.value })} value={tenant.firstname}
                 />
