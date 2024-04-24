@@ -3,6 +3,7 @@ import Layout from './Pages/Layout.jsx'
 import Home from './Pages/Home.jsx'
 import Login from './Authentication/Login.jsx'
 import Payments from './Pages/Payments.jsx'
+import GuestView from './Pages/GuestView.jsx';
 
 
 
@@ -16,7 +17,7 @@ function App() {
             <Route index element={<Home/>} />
             <Route path='login' element={<Login/>}/>
             <Route path='payments' element={<Payments/>}/>
-
+            <Route path='guestview' element={<GuestView/>}/>
           
         </Route>
       </Routes>
