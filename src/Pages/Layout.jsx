@@ -11,7 +11,7 @@ function Layout () {
 
     useEffect(() => {
 
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, (user) => {            //Authentication
             if (user) {
                 setAuthentication(true)
                 const uid = user.uid;
@@ -22,9 +22,9 @@ function Layout () {
 
     }, [])
 
-    const Logout = () => {
+    const Logout = () => {                          //Logout function
         signOut(auth).then(() => {
-            navigate('/login');
+            navigate('/login');                     //navigate to login page if logged out
         })
         setAuthentication(false)
 
@@ -43,7 +43,7 @@ function Layout () {
 
                     <div class="text-sm lg:flex-grow">
                     {
-                        authenticated ?
+                        authenticated ?     //Return value if the user is authenticated
                         <>
                         <Link to='/' class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-violet-800 mr-4">
                         Tenant Dashboard
@@ -58,7 +58,7 @@ function Layout () {
                     </div>
 
                     {
-                        authenticated ? 
+                        authenticated ? //Return value if the user is not authenticated
                         <div>
                             <button onClick={Logout} class="inline-block text-sm px-4 py-2 leading-none border rounded 
                             text-white border-white hover:border-transparent hover:text-violet-800 hover:bg-white 
@@ -80,7 +80,7 @@ function Layout () {
         <footer class="bg-transparent mt-60">
             <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
                 {
-                    authenticated ? 
+                    authenticated ? //Return value if the user is authenticated
                     <div class="sm:flex sm:items-center sm:justify-between">
                         <Link to='/' class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse hover:text-violet-900">
                             <span class="self-center lg:text-2xl sm:text-xl font-semibold whitespace-nowrap text-gray-400">
