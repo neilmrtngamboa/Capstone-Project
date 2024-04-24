@@ -12,7 +12,7 @@ function Payments() {
     const auth = getAuth(firebaseApp);
     let navigate = useNavigate();
 
-    const [paymentDetails, setPaymentDetails] = useState({
+    const [paymentDetails, setPaymentDetails] = useState({    
         name: '',
         unit: '',
         amount: 0,
@@ -26,7 +26,7 @@ function Payments() {
 
     useEffect(() => {
 
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, (user) => {       //Authentication
             if (user) {
                 setUserProfile({
                     email: user.email,
@@ -36,11 +36,11 @@ function Payments() {
             }
         });
 
-        onSnapshot(collection(db, 'payments'), snapshot => {
+        onSnapshot(collection(db, 'payments'), snapshot => {     //Fetch the data from the firestore database
             const newPaymentList = [];
 
             snapshot.forEach(payment => {
-                let paymentID = payment.data();
+                let paymentID = payment.data();                 //where to store the fetched data id
                 paymentID['paymentID'] = payment.id
                 newPaymentList.push(paymentID)
             })
@@ -52,35 +52,35 @@ function Payments() {
 
     const addPayment = () => {
         if (paymentDetails.name === '' || paymentDetails.unit === '' || paymentDetails.amount === 0
-            || paymentDetails.amount === '') {
+            || paymentDetails.amount === '') { 
                 
                 Swal.fire({
                     title: 'Process Failed!',
-                    text: 'Please fill out the empty fields!',
+                    text: 'Please fill out the empty fields!',  //Alert if the fields are empty
                     icon: 'error',
                     confirmButtonText: 'Ok'
                   })
         } else {
-            addDoc(collection(db, 'payments'), paymentDetails)
-            setPaymentList(paymentList => [...paymentList, paymentDetails])
-            setTotalEarnings(totalEarnings + parseInt(paymentDetails.amount));
+            addDoc(collection(db, 'payments'), paymentDetails)    //Add the data to the firestore database and collection
+            setPaymentList(paymentList => [...paymentList, paymentDetails])  //Push the data to the main array
+            setTotalEarnings(totalEarnings + parseInt(paymentDetails.amount)); //To calculate the total earnings after adding a payment
             Swal.fire({
                 title: 'Payment added!',
-                text: 'Data has been successfully added!',
+                text: 'Data has been successfully added!',                  //Alert if the data has been added dsuccessfully
                 icon: 'success',
                 confirmButtonText: 'Ok'
               })
             setPaymentDetails({
-                ...paymentDetails,
+                ...paymentDetails,                                          //Clear the values after adding
                 name: '',
                 unit: '',
             })
         }
     }
 
-    const deletePayment = (paymentID, amount) => {
-        deleteDoc(doc(db, 'payments', paymentID))
-        setTotalEarnings(totalEarnings - parseInt(amount));
+    const deletePayment = (paymentID, amount) => {                          //Delete Function
+        deleteDoc(doc(db, 'payments', paymentID))                           //Delete specific data
+        setTotalEarnings(totalEarnings - parseInt(amount));                 //Subtract the payment to the total earnings
     }
 
     return (
@@ -108,7 +108,7 @@ function Payments() {
             <h5 className="flex justify-center mt-5 text-2xl font-semibold">Earnings: {totalEarnings}</h5>
                             
             {
-                paymentList.map((showPayments) =>
+                paymentList.map((showPayments) => //Pass data and function to other component (ListOfPayments.jsx)
                     <ListOfPayments
                         key={showPayments.id}
                         name={showPayments.name}
@@ -116,6 +116,7 @@ function Payments() {
                         amount={showPayments.amount}
                         status={showPayments.status}
                         date={showPayments.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}
+                        //Convert the date(Timestamp) to Date and then to String
                         paymentID={showPayments.paymentID}
                         deletePayment={deletePayment}
                     />
