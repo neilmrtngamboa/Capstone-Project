@@ -5,22 +5,22 @@ import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 
 function GuestView() {
 
-    const db = getFirestore(firebaseApp)
-    const [available,setAvailable] = useState([])
+    const db = getFirestore(firebaseApp)              //Fetch API key & database 
+    const [available,setAvailable] = useState([])     //The array where to store the fetched data
 
     useEffect (() => {
 
-        onSnapshot(collection(db, 'tenants'), getAvailable => {
-            const newAvailable = []
+        onSnapshot(collection(db, 'tenants'), getAvailable => {            //use firebase function onSnapshot to fetch data from the database and collection
+            const newAvailable = []                         
             getAvailable.forEach(availableUnit => {
-                newAvailable.push(availableUnit.data())
+                newAvailable.push(availableUnit.data())                   //push the fetched data into the array
                 setAvailable(newAvailable)
             })
         }
         )
     }, [])
 
-    if (2 > available.length){
+    if (2 > available.length){   //return value if not all the units have been occupied 
         return (
             <div className="mt-60">
                 <h1 className='flex justify-center font-semibold lg:text-2xl'>{available.length} unit/s have been occupied</h1>
@@ -31,7 +31,7 @@ function GuestView() {
             </div>
         )
     } else {
-        return (
+        return ( //return value if all the units have been occupied 
             <div className="mt-60">
             <h1 className='flex justify-center mt-3 font-semibold text-2xl text-gray-400'>All of the units have been occupied.</h1>
             <button className='flex mx-auto mt-5 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow'>
