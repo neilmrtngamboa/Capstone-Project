@@ -6,6 +6,7 @@ import ListOfPayments from "./ListOfPayments.jsx";
 import { getAuth, onAuthStateChanged} from 'firebase/auth';
 import Swal from "sweetalert2";
 
+
 function Payments() {
 
     const db = getFirestore(firebaseApp);
@@ -83,8 +84,12 @@ function Payments() {
         setTotalEarnings(totalEarnings - parseInt(amount));                 //Subtract the payment to the total earnings
     }
 
+    const printPayments = () => {
+        window.print()
+    }
+
     return (
-        <section className="bg-indigo-50 p-5">
+        <body className="bg-indigo-50 p-5">
 
             <h1 className="flex justify-center md:text-3xl font-semibold">Payments</h1>
             <div className="grid grid-cols-3 gap-1 mt-5 p-3">
@@ -104,25 +109,33 @@ function Payments() {
             </div>
 
             <button onClick={addPayment} className='mt-5 flex mx-auto py-2 px-4 rounded shadow-lg bg-indigo-700 hover:bg-indigo-800 text-white font-bold border-b-4 
-                        border-indigo-800 hover:border-indigo-950'> Add Payment</button>
+                        border-indigo-800 hover:border-indigo-950'> Add Payment</button>           
+                      
             <h5 className="flex justify-center mt-5 text-2xl font-semibold">Earnings: {totalEarnings}</h5>
-                            
+            
+            
             {
-                paymentList.map((showPayments) => //Pass data and function to other component (ListOfPayments.jsx)
-                    <ListOfPayments
-                        key={showPayments.id}
-                        name={showPayments.name}
-                        unit={showPayments.unit}
-                        amount={showPayments.amount}
-                        status={showPayments.status}
-                        date={showPayments.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}
-                        //Convert the date(Timestamp) to Date and then to String
-                        paymentID={showPayments.paymentID}
-                        deletePayment={deletePayment}
-                    />
-                )
-            }
-        </section>
+                    paymentList.map((showPayments) => //Pass data and function to other component (ListOfPayments.jsx)
+                        <ListOfPayments
+                            key={showPayments.id}
+                            name={showPayments.name}
+                            unit={showPayments.unit}
+                            amount={showPayments.amount}
+                            status={showPayments.status}
+                            date={showPayments.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}
+                            //Convert the date(Timestamp) to Date and then to String
+                            paymentID={showPayments.paymentID}
+                            deletePayment={deletePayment}
+                            printPayments={printPayments}
+                        />
+                    )
+                }
+            
+
+                
+                            
+            
+        </body>
     )
 }
 export default Payments;
