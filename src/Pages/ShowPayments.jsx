@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getFirestore, collection, onSnapshot} from "firebase/firestore";
+import { getFirestore, collection, onSnapshot } from "firebase/firestore";
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -9,13 +9,13 @@ function ShowPayments() {
     const auth = getAuth(firebaseApp);
     const [payments, setPayments] = useState([])
     const [userProfile, setUserProfile] = useState({})
-    
-    useEffect (() => {
+
+    useEffect(() => {
 
         onAuthStateChanged(auth, (user) => {                //Authentication
             if (user) {
                 setUserProfile({
-                    email: user.email,                      
+                    email: user.email,
                 })
             } else {
                 navigate('/login');
@@ -23,16 +23,43 @@ function ShowPayments() {
         });
 
         onSnapshot(collection(db, 'payments'), getPayments => {            //use firebase function onSnapshot to fetch data from the database and collection
-            const newPayments = []                         
+            const newPayments = []
             getPayments.forEach(payment => {
                 newPayments.push(payment.data())                   //push the fetched data into the array
                 setPayments(newPayments)
             })
         }
         )
+
+
     }, [])
 
-    
+    if (payments.length > 0) {
+
+        return (
+            <main className='p-20'>
+                {
+                    payments.map(showPayments =>
+                        <>
+                            <div className="border-2 border-slate-400 p-5 rounded shadow-md mt-5">
+                                <h4 className="font-light">Name: <b className="font-semibold me-1">{showPayments.name}</b>
+                                    Unit: <b className="font-semibold">{showPayments.unit}</b> Amount: <b className="font-semibold me-1">{showPayments.amount}</b>
+                                    Status: <b className="font-semibold">{showPayments.status}</b> Date: <b className="font-semibold">{showPayments.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}</b></h4>  
+                            </div>
+                        </>
+                    )
+                }
+            </main>
+        )
+    } else{
+        return(
+            <main className='p-20 mt-5'>
+            <h1 className='flex justify-center mt-10 font-bold text-2xl text-gray-400'>There are no payments to show.</h1>
+            </main>
+        )
+    }
+
+
 
 }
 
