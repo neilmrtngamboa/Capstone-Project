@@ -84,14 +84,16 @@ function Payments() {
         setTotalEarnings(totalEarnings - parseInt(amount));                 //Subtract the payment to the total earnings
     }
 
-    const printPayments = () => {
-        window.print()
-    }
-
     return (
         <body className="bg-indigo-50 p-5">
 
             <h1 className="flex justify-center md:text-3xl font-semibold">Payments</h1>
+            
+            <button className="flex mx-auto mt-3 px-4 py-2 border-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold rounded shadow"
+            onClick={() => window.print()}
+            >
+                Print payments
+            </button>
             <div className="grid grid-cols-3 gap-1 mt-5 p-3">
                 <input type="text" placeholder="Name" onChange={(e) => setPaymentDetails({ ...paymentDetails, name: e.target.value })}
                     value={paymentDetails.name} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight 
@@ -126,7 +128,6 @@ function Payments() {
                             //Convert the date(Timestamp) to Date and then to String
                             paymentID={showPayments.paymentID}
                             deletePayment={deletePayment}
-                            printPayments={printPayments}
                         />
                     )
                 }
