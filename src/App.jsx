@@ -4,6 +4,7 @@ import Home from './Pages/Home.jsx'
 import Login from './Authentication/Login.jsx'
 import Payments from './Pages/Payments.jsx'
 import GuestView from './Pages/GuestView.jsx';
+import ShowPayments from './Pages/ShowPayments.jsx';
 
 
 
@@ -18,6 +19,7 @@ function App() {
             <Route path='login' element={<Login/>}/>
             <Route path='payments' element={<Payments/>}/>
             <Route path='guestview' element={<GuestView/>}/>
+            <Route path='showpayments' element={<ShowPayments/>}/>
           
         </Route>
       </Routes>

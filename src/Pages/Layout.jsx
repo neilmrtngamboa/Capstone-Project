@@ -48,8 +48,11 @@ function Layout () {
                         <Link to='/' class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-violet-800 mr-4">
                         Tenant Dashboard
                         </Link>
+                        <Link to='/showpayments' class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-violet-800 mr-4">
+                             Payments
+                        </Link>
                         <Link to='/payments' class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-violet-800 mr-4">
-                            Payments
+                            Manage Payments
                         </Link>
                         </>
                         :
