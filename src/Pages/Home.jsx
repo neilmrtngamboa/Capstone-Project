@@ -25,7 +25,7 @@ function Home() {
     const [tenantList, setTenantList] = useState([])       //Array where to store the fetched data from the firestore database
     const [editTenantDetails, setEditTenantDetails] = useState(false) //Boolean, to setup the edit function
     const [timeEdited, setTimeEdited] = useState(false)         //Boolean, to show the time edited
-    const [deleteButtonStatus, setDeleteButtonStatus] = useState(false)    
+    const [deleteButtonStatus, setDeleteButtonStatus] = useState(false)    //state where the delete button will be disabled when updating data
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {                //Authentication
