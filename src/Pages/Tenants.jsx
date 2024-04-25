@@ -1,5 +1,5 @@
 
-function Tenants({ firstname, lastname, unit, deleteTenant, tenantID, setUpdate, date, timeEdited, phonenumber }) {
+function Tenants({ firstname, lastname, unit, deleteTenant, tenantID, setUpdate, date, timeEdited, phonenumber, deleteButtonStatus }) {
     return (
         <>
             {
@@ -15,7 +15,7 @@ function Tenants({ firstname, lastname, unit, deleteTenant, tenantID, setUpdate,
                             <div className="mt-3">
                                 <button className='rounded shadow-lg bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 border-b-4 
                                 border-red-600 hover:border-red-800 me-2'
-                                    onClick={() => deleteTenant(tenantID)}>Delete</button>
+                                    onClick={() => deleteTenant(tenantID)} disabled={deleteButtonStatus}>Delete</button>
                                 <button className='rounded shadow-lg bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 border-b-4 
                                 border-emerald-600 hover:border-emerald-800'
                                     onClick={() => setUpdate(tenantID, firstname, lastname, unit, phonenumber)}>Update</button>

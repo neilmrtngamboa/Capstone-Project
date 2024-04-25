@@ -24,7 +24,8 @@ function Home() {
 
     const [tenantList, setTenantList] = useState([])       //Array where to store the fetched data from the firestore database
     const [editTenantDetails, setEditTenantDetails] = useState(false) //Boolean, to setup the edit function
-    const [timeEdited, setTimeEdited] = useState(false)    //Boolean, to show the time edited
+    const [timeEdited, setTimeEdited] = useState(false)         //Boolean, to show the time edited
+    const [deleteButtonStatus, setDeleteButtonStatus] = useState(false)    
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {                //Authentication
@@ -118,6 +119,7 @@ function Home() {
             date: Timestamp.now()
             
         })
+        setDeleteButtonStatus(true)
         setEditTenantDetails(true)
         setTimeEdited(true)
     }
@@ -146,6 +148,7 @@ function Home() {
             unit: '',
             phonenumber: ''
         })
+        setDeleteButtonStatus(false)
 
         setEditTenantDetails(false)
     }
@@ -203,6 +206,7 @@ function Home() {
                             phonenumber={showTenants.phonenumber}
                             date={showTenants.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}
                             //convert the date(Timestamp) to a date and to a string
+                            deleteButtonStatus={deleteButtonStatus}
                         />
                     )
                 }
