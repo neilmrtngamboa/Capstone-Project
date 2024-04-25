@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 import { getFirestore, collection, onSnapshot } from "firebase/firestore";
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useNavigate } from "react-router-dom";
 
 function ShowPayments() {
 
     const db = getFirestore(firebaseApp)
     const auth = getAuth(firebaseApp);
+    let navigate = useNavigate();
+    
     const [payments, setPayments] = useState([])
     const [userProfile, setUserProfile] = useState({})
 

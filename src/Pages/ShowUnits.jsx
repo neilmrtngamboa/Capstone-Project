@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { getFirestore, collection, onSnapshot } from "firebase/firestore";
 import firebaseApp from '../FirebaseConfig/FirebaseConfig.jsx'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -7,6 +8,7 @@ function ShowUnits () {
     
     const db = getFirestore(firebaseApp)
     const auth = getAuth(firebaseApp)
+    let navigate = useNavigate();
 
     const [units, setUnits] = useState([])
     const [userProfile, setUserProfile] = useState({})
