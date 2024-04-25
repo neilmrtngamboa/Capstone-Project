@@ -23,6 +23,15 @@ function ShowUnits () {
             }
         });
 
+        onSnapshot(collection(db, 'payments'), fetchData => {
+            const newUnits = []
+            fetchData.forEach(unit => {
+                newUnits.push(unit.data())
+                setUnits(newUnits)
+            })
+        } 
+        )
+
     }, [])
 
 }
