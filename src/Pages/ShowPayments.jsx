@@ -44,12 +44,13 @@ function ShowPayments() {
                 {
                     payments.map(showPayments =>
                         <>
-                            <button className="flex mx-auto mt-3 px-4 py-2 border-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold rounded shadow"
+                            <button className="flex mx-auto mt-3 px-4 py-2 border-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold rounded shadow
+                            dark:bg-slate-500 dark:hover:bg-slate-400 dark:border-none"
                                 onClick={() => window.print()}
                             >
                                 Print payments
                             </button>
-                            <div className="border-2 border-slate-400 p-5 rounded shadow-md mt-5">
+                            <div className="border-2 border-slate-400 p-5 rounded shadow-md mt-5 dark:text-gray-300 dark:text-white">
                                 <h4 className="font-light">Name: <b className="font-semibold me-1">{showPayments.name}</b>
                                     Unit: <b className="font-semibold">{showPayments.unit}</b> Amount: <b className="font-semibold me-1">{showPayments.amount}</b>
                                     Status: <b className="font-semibold">{showPayments.status}</b> Date: <b className="font-semibold">{showPayments.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}</b></h4>

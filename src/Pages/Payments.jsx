@@ -86,30 +86,30 @@ function Payments() {
     }
 
     return (
-        <body className="bg-indigo-50 p-5">
+        <body className="bg-indigo-50 dark:bg-zinc-600 p-5">
 
-            <h1 className="flex justify-center md:text-3xl font-semibold">Payments</h1>
+            <h1 className="flex justify-center md:text-3xl font-semibold dark:text-white">Payments</h1>
                         
             <div className="grid grid-cols-3 gap-1 mt-5 p-3">
                 <input type="text" placeholder="Name" onChange={(e) => setPaymentDetails({ ...paymentDetails, name: e.target.value })}
                     value={paymentDetails.name} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight 
-                    focus:outline-none focus:shadow-outline'
+                    focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-none dark:text-white'
                 />
                 <input type="text" placeholder="Unit" onChange={(e) => setPaymentDetails({ ...paymentDetails, unit: e.target.value })}
                     value={paymentDetails.unit} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight 
-                    focus:outline-none focus:shadow-outline'
+                    focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-none dark:text-white'
                 />
                 <input type="number" placeholder="Amount"
                     onChange={(e) => setPaymentDetails({ ...paymentDetails, amount: e.target.value })}
                     value={paymentDetails.amount} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight 
-                    focus:outline-none focus:shadow-outline'
+                    focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-none dark:text-white'
                 />
             </div>
 
             <button onClick={addPayment} className='mt-5 flex mx-auto py-2 px-4 rounded shadow-lg bg-indigo-700 hover:bg-indigo-800 text-white font-bold border-b-4 
-                        border-indigo-800 hover:border-indigo-950'> Add Payment</button>           
+                        border-indigo-800 hover:border-indigo-950 dark:bg-indigo-800 dark:border-indigo-900 dark:hover:bg-indigo-950'> Add Payment</button>           
                       
-            <h5 className="flex justify-center mt-5 text-2xl font-semibold">Earnings: {totalEarnings}</h5>
+            <h5 className="flex justify-center mt-5 text-2xl font-semibold dark:text-white">Earnings: {totalEarnings}</h5>
             
             
             {

@@ -1,7 +1,7 @@
 function ListOfPayments ({name, unit, amount, status, date, paymentID, deletePayment}) {
     return(
         <>
-        <div className="border-2 border-slate-400 p-5 rounded shadow-md mt-5">
+        <div className="border-2 border-slate-400 p-5 rounded shadow-md mt-5 dark:text-white">
             <h4 className="font-light">Name: <b className="font-semibold me-1">{name}</b> 
             Unit: <b className="font-semibold">{unit}</b> Amount: <b className="font-semibold me-1">{amount}</b> 
             Status: <b className="font-semibold">{status}</b> Date: <b className="font-semibold">{date}</b></h4>

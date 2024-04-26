@@ -41,13 +41,13 @@ function ShowUnits () {
             <main className='p-10 grid lg:grid-cols-5 lg:gap-5'>
                 {
                     units.map(getUnits => 
-                        <div className='border-2 border-slate-400 p-5 rounded shadow-md mt-5 grid lg:grid-cols-2'>
+                        <div className='border-2 border-slate-400 p-5 rounded shadow-md mt-5 grid lg:grid-cols-2 dark:text-gray-300 dark:shadow-xl'>
                             <img src="https://icons.iconarchive.com/icons/aha-soft/security/256/key-icon.png" className='h-14 w-14 my-auto' alt="" />
                             
                             <div>
-                            <h3 className='font-light'>Unit: <b className='font-bold'>{getUnits.unit}</b> </h3>
-                            <h3 className='font-light'>Contact No: <b className='font-bold'>{getUnits.phonenumber}</b></h3>
-                            <h3 className='font-light'>Date of Arrival: <b className='font-bold'>{getUnits.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}</b></h3>
+                            <h3 className='font-light'>Unit: <b className='font-bold dark:text-white'>{getUnits.unit}</b> </h3>
+                            <h3 className='font-light'>Contact No: <b className='font-bold dark:text-white'>{getUnits.phonenumber}</b></h3>
+                            <h3 className='font-light'>Date of Arrival: <b className='font-bold dark:text-white'>{getUnits.date.toDate().toLocaleTimeString('en-US', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', year: '2-digit' })}</b></h3>
                             </div>
                             
                                                   

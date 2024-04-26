@@ -5,7 +5,7 @@ function Tenants({ firstname, lastname, unit, deleteTenant, tenantID, setUpdate,
             {
                 timeEdited ?
                     (
-                        <div>
+                        <div className="dark:text-white dark:border-2 dark:border-gray-500 dark:p-5 dark:rounded-lg dark:shadow-xl">
                             <h5 className="text-lg font-light">{firstname} {lastname}</h5>
                             <h5 className="text-lg">Unit: <b>{unit}</b></h5>
                             <h5 className="text-lg">Phone Number: <b>{phonenumber}</b></h5>
@@ -26,7 +26,7 @@ function Tenants({ firstname, lastname, unit, deleteTenant, tenantID, setUpdate,
                     )
                     :
                     (
-                        <div>
+                        <div className="dark:text-white dark:border-2 dark:border-gray-500 dark:p-5 dark:rounded-lg dark:shadow-xl">
                             <h5 className="text-lg font-light">{firstname} {lastname}</h5>
                             <h5 className="text-lg">Unit: <b>{unit}</b></h5>
                             <h5 className="text-lg">Phone Number: <b>{phonenumber}</b></h5>

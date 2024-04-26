@@ -154,20 +154,24 @@ function Home() {
     }
 
     return (
-        <main className='bg-indigo-50 p-5'>
+        <main className='bg-indigo-50 dark:bg-zinc-600 p-5'>
 
-            <h5 className='flex justify-center mb-5 font-semibold text-lg lg:text-3xl'>Add a new tenant</h5>
+            <h5 className='flex justify-center mb-5 font-semibold text-lg lg:text-3xl dark:text-white'>Add a new tenant</h5>
             <div className='grid lg:grid-cols-4 sm:grid-cols-3 gap-2'>
-                <input type="text" placeholder='First Name' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
+                <input type="text" placeholder='First Name' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline
+                dark:bg-gray-700 dark:border-none dark:text-white'
                     onChange={(e) => setTenant({ ...tenant, firstname: e.target.value })} value={tenant.firstname}
                 />
-                <input type="text" placeholder='Last Name' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
+                <input type="text" placeholder='Last Name' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline
+                dark:bg-gray-700 dark:border-none dark:text-white'
                     onChange={(e) => setTenant({ ...tenant, lastname: e.target.value })} value={tenant.lastname}
                 />
-                <input type="text" placeholder='Unit' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
+                <input type="text" placeholder='Unit' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline
+                dark:bg-gray-700 dark:border-none dark:text-white'
                     onChange={(e) => setTenant({ ...tenant, unit: e.target.value })} value={tenant.unit}
                 />
-                <input type="text" placeholder='Phone Number' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
+                <input type="text" placeholder='Phone Number' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline
+                dark:bg-gray-700 dark:border-none dark:text-white'
                     onChange={(e) => setTenant({ ...tenant, phonenumber: e.target.value })} value={tenant.phonenumber}
                 />
 
@@ -176,18 +180,18 @@ function Home() {
                 editTenantDetails ?
                     (
                         <button className='mt-5 flex mx-auto py-2 px-4 rounded shadow-lg bg-indigo-500 hover:bg-indigo-700 text-white font-bold border-b-4 
-                        border-indigo-800 hover:border-indigo-950'
+                        border-indigo-800 hover:border-indigo-950 dark:bg-indigo-800 dark:border-indigo-900 dark:hover:bg-indigo-950'
                             onClick={updateTenantDetails}>Update</button>
                     )
                     :
                     (
                         <button className='mt-5 flex mx-auto py-2 px-4 rounded shadow-lg bg-indigo-700 hover:bg-indigo-800 text-white font-bold border-b-4 
-                        border-indigo-800 hover:border-indigo-950'
+                        border-indigo-800 hover:border-indigo-950 dark:bg-indigo-800 dark:border-indigo-900 dark:hover:bg-indigo-950'
                             onClick={addTenant}>Add+</button>
                     )
             }
 
-            <h3 className='text-3xl flex justify-center mt-12 tracking-wider'
+            <h3 className='text-3xl flex justify-center mt-12 tracking-wider dark:text-white'
             >Units Occupied: {tenantList.length}/2</h3>
 
             <div className='grid grid-cols-2 gap-4 sm:grid sm:grid-cols-3 mt-10'>
